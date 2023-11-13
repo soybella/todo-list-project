@@ -1,22 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import TaskList from "./TaskList";
 
 function App() {
+  let [addTask, setAddTask] = useState("");
+  // let [taskList, setTaskList] = useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    // setTaskList();
+    // console.log(addTask);
+    setAddTask(event.target.value);
+  }
+
+  function showTaskList(event) {
+    // event.preventDefault();
+    setAddTask(event.target.value);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1> What's the plan for today? </h1>
+        <form onClick={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Add a task"
+            onChange={showTaskList}
+          ></input>
+          <input
+            type="submit"
+            className="button"
+            value="Add"
+            // onClick={showTaskList}
+          ></input>
+        </form>
+        <TaskList task={addTask} />
       </header>
     </div>
   );
