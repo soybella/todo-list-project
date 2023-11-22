@@ -1,25 +1,27 @@
-import { useState } from "react";
-// import './App.css';
+import { useEffect, useState } from "react";
+import TodoForm from "./TodoForm";
+import TodoList from "./TodoList";
+import "./App.css";
 
 function App() {
-  const [newTodoItem, setNewTodoItem] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS");
+    if (localValue == null) return [];
 
-  function handleSubmit(event) {
-    event.preventDefault();
+    return JSON.parse(localValue);
+  });
 
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(todos));
+  }, [todos]);
+
+  function addTodo(title) {
     setTodos((currentTodos) => {
       return [
         ...currentTodos,
-        { id: crypto.randomUUID(), title: newTodoItem, completed: false },
+        { id: crypto.randomUUID(), title, completed: false },
       ];
     });
-
-    setNewTodoItem("");
-  }
-
-  function handleChange(event) {
-    setNewTodoItem(event.target.value);
   }
 
   function toggleTodo(id, completed) {
@@ -41,42 +43,20 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit} className="todo-form">
-        <div className="form-row">
-          <label htmlFor="todo-item">New Todo</label>
-          <input
-            value={newTodoItem}
-            onChange={handleChange}
-            type="text"
-            id="todo-item"
+      <div className="container">
+        <h1 className="header">What's the plan for today?</h1>
+        <div className="container form-container">
+          <TodoForm onSubmit={addTodo} />
+          <TodoList
+            todos={todos}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
           />
         </div>
-        <button className="btn">Add Todo</button>
-      </form>
-      <h1 className="header">Todo List</h1>
-      <ul className="list">
-        {todos.length === 0 && "No Todos"}
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={(e) => toggleTodo(todo.id, e.target.checked)}
-                />
-                {todo.title}
-              </label>
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteTodo(todo.id)}
-              >
-                Delete
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+        <footer className="footer">
+          Made with ♥︎ by Isabella Lizarde 2023
+        </footer>
+      </div>
     </div>
   );
 }
