@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import Footer from "./Footer.js";
 import "./App.css";
 
 function App() {
@@ -53,9 +54,7 @@ function App() {
             deleteTodo={deleteTodo}
           />
         </div>
-        <footer className="footer">
-          Made with ♥︎ by Isabella Lizarde 2023
-        </footer>
+        <Footer />
       </div>
     </div>
   );

@@ -39,15 +39,15 @@
 }
 
 .form-container {
-  border: 1px solid grey;
-  border-radius: 7px;
+  /* border: 1px solid grey; */
+  border-radius: 12px;
   padding: 20px;
   background: #302531;
   max-width: 600px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
   /* height: 100vh; */
   /* padding: 10px; */
-  /* margixn: 0 auto; */
+  margin: 20px auto;
 }
 
 .form-row {
