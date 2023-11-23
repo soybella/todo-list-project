@@ -13,12 +13,13 @@ export default function TodoItem({
         <label>
           <input
             type="checkbox"
+            className="checkbox"
             checked={completed}
             onChange={(e) => toggleTodo(id, e.target.checked)}
           />
           {title}
         </label>
-        <button className="btn" onClick={() => deleteTodo(id)}>
+        <button className="btn btn-delete" onClick={() => deleteTodo(id)}>
           🗑
         </button>
       </li>
