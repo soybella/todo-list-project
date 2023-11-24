@@ -20,7 +20,7 @@ export default function TodoItem({
           {title}
         </label>
         <button className="btn btn-delete" onClick={() => deleteTodo(id)}>
-          🗑
+          <i className="fa-solid fa-trash-can"></i>
         </button>
       </li>
     </div>
