@@ -12,7 +12,6 @@ export default function Footer() {
         >
           Isabella Lizarde{" "}
         </a>{" "}
-        2023
       </footer>
     </div>
   );
